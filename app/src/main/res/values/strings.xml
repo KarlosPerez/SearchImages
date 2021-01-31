@@ -6,4 +6,5 @@
     <string name="item_unsplash_img">image</string>
     <string name="load_state_txt_error">Results could not be loaded</string>
     <string name="load_state_btn_retry">Retry</string>
+    <string name="menu_action_search">Search</string>
 </resources>
