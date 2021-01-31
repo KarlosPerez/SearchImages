@@ -13,7 +13,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
 
     private val viewModel by viewModels<GalleryViewModel>()
 
-    private var _binding : FragmentGalleryBinding? = null
+    private var _binding: FragmentGalleryBinding? = null
     private val binding get() = _binding!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -25,7 +25,10 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
 
         binding.apply {
             galleryRecycler.setHasFixedSize(true)
-            galleryRecycler.adapter = adapter
+            galleryRecycler.adapter = adapter.withLoadStateHeaderAndFooter(
+                header = UnsplashPhotoLoadStateAdapter { adapter.retry() },
+                footer = UnsplashPhotoLoadStateAdapter { adapter.retry() }
+            )
         }
 
         /** its important to pass viewLifecycleOwner to the livedata method and not the fragment itself
