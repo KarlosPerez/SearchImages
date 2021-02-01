@@ -1,18 +1,20 @@
 package com.karlosprojects.searchimagesapp.ui.gallery
 
+import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.switchMap
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import androidx.paging.cachedIn
 import com.karlosprojects.searchimagesapp.data.UnsplashRepository
 
 class GalleryViewModel @ViewModelInject constructor(
-    private val repository: UnsplashRepository
+    private val repository: UnsplashRepository,
+    @Assisted state : SavedStateHandle
 ) : ViewModel() {
 
-    private val currentQuery = MutableLiveData(DEFAULT_QUERY)
+    /**
+     * We use state instead of MutableLiveData, just for handling process death purposes
+     */
+    private val currentQuery = state.getLiveData(CURRENT_QUERY, DEFAULT_QUERY)
 
     /**
      * with swithMap this will be executed whenever the value of the livedata changes; when it happens
@@ -29,6 +31,7 @@ class GalleryViewModel @ViewModelInject constructor(
     }
 
     companion object {
+        private const val CURRENT_QUERY = "current_query"
         private const val DEFAULT_QUERY = "dogs"
     }
 }
