@@ -9,5 +9,18 @@
         android:id="@+id/galleryFragment"
         android:name="com.karlosprojects.searchimagesapp.ui.gallery.GalleryFragment"
         android:label="fragment_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery" >
+        <action
+            android:id="@+id/action_galleryFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.karlosprojects.searchimagesapp.ui.details.DetailFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" >
+        <argument
+            android:name="photo"
+            app:argType="com.karlosprojects.searchimagesapp.data.UnsplashPhoto" />
+    </fragment>
 </navigation>
